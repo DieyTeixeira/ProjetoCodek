@@ -22,6 +22,7 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DateRangePicker
+import androidx.compose.material3.DateRangePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -140,11 +141,11 @@ fun DateScreen2(
                 endDateMillis = dateRangePickerState.selectedEndDateMillis
                 if (startDateMillis != null && endDateMillis != null) {
                     dateIni = Instant.ofEpochMilli(startDateMillis!!)
-                        .atZone(ZoneId.systemDefault())
+                        .atZone(ZoneId.of("UTC"))
                         .toLocalDate()
                         .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                     dateFim = Instant.ofEpochMilli(endDateMillis!!)
-                        .atZone(ZoneId.systemDefault())
+                        .atZone(ZoneId.of("UTC"))
                         .toLocalDate()
                         .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                 }
@@ -163,7 +164,7 @@ fun DateScreen2(
                                     state = dateRangePickerState,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(1.dp), // Padding interno
+                                        .padding(1.dp),
                                     title = {
                                         Text(
                                             text = "Selecione um intervalo",

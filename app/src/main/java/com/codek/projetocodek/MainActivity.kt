@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
@@ -27,17 +26,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import com.codek.projetocodek.features.dateSet.DateScreen
-import com.codek.projetocodek.features.dateSet.DateScreen1
 import com.codek.projetocodek.features.dateSet.DateScreen2
-import com.codek.projetocodek.features.dateSet.DateScreenTotal
 import com.codek.projetocodek.features.screens.CaronaScreen
 import com.codek.projetocodek.features.screens.EventosScreen
 import com.codek.projetocodek.features.screens.TripScreen
@@ -92,7 +85,6 @@ sealed class ScreenItem(
 }
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 fun App() {
     val screens = remember {
         listOf(
@@ -108,7 +100,7 @@ fun App() {
     val pagerState = rememberPagerState {
         screens.size
     }
-    LaunchedEffect(currentScreen){
+    LaunchedEffect(currentScreen) {
         pagerState.animateScrollToPage(
             screens.indexOf(currentScreen)
         )
@@ -148,22 +140,9 @@ fun App() {
                 ScreenItem.Eventos -> EventosScreen()
                 ScreenItem.Carona -> CaronaScreen()
                 ScreenItem.Trip -> TripScreen()
-                ScreenItem.Data -> DateScreen()
+                ScreenItem.Data -> DateScreen2()
             }
         }
-    }
-}
-
-@Composable
-fun UpdatesScreen(modifier: Modifier = Modifier) {
-    Box(modifier.fillMaxSize()) {
-        Text(
-            "Update",
-            Modifier.align(Alignment.Center),
-            style = TextStyle.Default.copy(
-                fontSize = 32.sp
-            )
-        )
     }
 }
 
