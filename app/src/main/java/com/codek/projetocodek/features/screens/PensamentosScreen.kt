@@ -61,6 +61,7 @@ fun PensamentosScreen(
     var showDialog by remember { mutableStateOf(false) }
     var currentPensamento by remember { mutableStateOf<Pensamento?>(null) }
     var expandedPensamentoId by remember { mutableStateOf<Int?>(null) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
 
     // Instância Retrofit
     val retrofit = Retrofit.Builder()
@@ -177,31 +178,43 @@ fun PensamentosScreen(
         }
         Spacer(Modifier.size(15.dp))
 
-        LazyColumn(
-            modifier.fillMaxSize(),
-            contentPadding = PaddingValues(10.dp),
-            verticalArrangement = Arrangement.spacedBy(15.dp)
-        ) {
-            // cards
-            items(pensamentos) { pensamento ->
-                PensamentoCard1(
-                    pensamento = pensamento,
-                    isExpanded = expandedPensamentoId == pensamento.id,
-                    onEdit = {
-                        currentPensamento = pensamento
-                        showDialog = true
-                        expandedPensamentoId = null
-                    },
-                    onDelete = {
-                        scope.launch {
-                            pensamentoApi.deletePensamento(pensamento.id.toString())
-                            pensamentos.remove(pensamento)
+        errorMessage?.let {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = it, color = Color.Red, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            }
+        } ?: run {
+            LazyColumn(
+                modifier.fillMaxSize(),
+                contentPadding = PaddingValues(10.dp),
+                verticalArrangement = Arrangement.spacedBy(15.dp)
+            ) {
+                // cards
+                items(pensamentos) { pensamento ->
+                    PensamentoCard1(
+                        pensamento = pensamento,
+                        isExpanded = expandedPensamentoId == pensamento.id,
+                        onEdit = {
+                            currentPensamento = pensamento
+                            showDialog = true
+                            expandedPensamentoId = null
+                        },
+                        onDelete = {
+                            scope.launch {
+                                pensamentoApi.deletePensamento(pensamento.id.toString())
+                                pensamentos.remove(pensamento)
+                            }
+                        },
+                        onClick = {
+                            expandedPensamentoId =
+                                if (expandedPensamentoId == pensamento.id) null else pensamento.id
                         }
-                    },
-                    onClick = {
-                        expandedPensamentoId = if (expandedPensamentoId == pensamento.id) null else pensamento.id
-                    }
-                )
+                    )
+                }
             }
         }
     }
