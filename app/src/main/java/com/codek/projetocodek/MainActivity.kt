@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Nightlife
+import androidx.compose.material.icons.filled.PostAdd
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -30,9 +31,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import com.codek.projetocodek.features.dateSet.DateScreen
 import com.codek.projetocodek.features.dateSet.DateScreen2
 import com.codek.projetocodek.features.screens.CaronaScreen
 import com.codek.projetocodek.features.screens.EventosScreen
+import com.codek.projetocodek.features.screens.PensamentosScreen
 import com.codek.projetocodek.features.screens.TripScreen
 import com.codek.projetocodek.ui.theme.CodekTheme
 
@@ -76,10 +79,10 @@ sealed class ScreenItem(
             label = "Trip"
         )
     )
-    data object Data : ScreenItem(
+    data object Cards : ScreenItem(
         bottomAppBarItem = BottomAppBarItem(
-            iconVector = Icons.Default.CalendarMonth,
-            label = "Data"
+            iconVector = Icons.Default.PostAdd,
+            label = "Cards"
         )
     )
 }
@@ -91,7 +94,7 @@ fun App() {
             ScreenItem.Eventos,
             ScreenItem.Carona,
             ScreenItem.Trip,
-            ScreenItem.Data
+            ScreenItem.Cards
         )
     }
     var currentScreen by remember {
@@ -140,7 +143,7 @@ fun App() {
                 ScreenItem.Eventos -> EventosScreen()
                 ScreenItem.Carona -> CaronaScreen()
                 ScreenItem.Trip -> TripScreen()
-                ScreenItem.Data -> DateScreen2()
+                ScreenItem.Cards -> PensamentosScreen()
             }
         }
     }

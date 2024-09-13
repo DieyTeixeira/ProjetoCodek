@@ -28,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -44,16 +45,34 @@ fun TripScreen(
 ) {
 
     Column {
-        Column(
+        Row(
             Modifier
                 .fillMaxWidth()
-//            .height(20.dp)
+                .height(150.dp)
                 .padding(10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
+            Box(
+                Modifier
+                    .rotate(-90f)
+                    .padding(start = 10.dp),
+                Alignment.CenterStart
+            ) {
+                Text(
+                    text = "TRIP",
+                    fontSize = 20.sp,
+                    color = Color(0xFF8F4A0E),
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Spacer(Modifier.size(10.dp))
             Image(
-                painter = painterResource(id = R.drawable.btn_trip),
-                contentDescription = null
+                painter = painterResource(id = R.drawable.trip_laranja),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(end = 10.dp)
+                    .align(Alignment.CenterVertically)
             )
         }
 
