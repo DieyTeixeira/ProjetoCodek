@@ -42,6 +42,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.material)
     implementation(libs.material3)
     implementation(libs.ui)
     implementation(libs.androidx.foundation)

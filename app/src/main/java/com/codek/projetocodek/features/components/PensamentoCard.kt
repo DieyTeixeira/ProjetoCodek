@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerInput
@@ -132,14 +133,19 @@ fun PensamentoCard1(
             if (isExpanded) {
                 Column(
                     Modifier
-                        .weight(0.07f)
-                        .height(80.dp),
+                        .weight(0.08f)
+                        .height(85.dp),
                     horizontalAlignment = Alignment.End,
                 ) {
                     Box(
                         Modifier
-                            .background(Color.White, RoundedCornerShape(10.dp))
-                            .padding(5.dp),
+                            .size(23.dp)
+                            .shadow(
+                                elevation = 3.dp,
+                                shape = RoundedCornerShape(15.dp),
+                                clip = true
+                            )
+                            .background(Color.White, RoundedCornerShape(15.dp)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -156,8 +162,13 @@ fun PensamentoCard1(
                     Spacer(Modifier.size(5.dp))
                     Box(
                         Modifier
-                            .background(Color.White, RoundedCornerShape(10.dp))
-                            .padding(5.dp),
+                            .size(23.dp)
+                            .shadow(
+                                elevation = 3.dp,
+                                shape = RoundedCornerShape(15.dp),
+                                clip = true
+                            )
+                            .background(Color.White, RoundedCornerShape(15.dp)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
